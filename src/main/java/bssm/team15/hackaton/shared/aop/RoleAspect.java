@@ -17,7 +17,7 @@ public class RoleAspect {
     @Before("@annotation(admin)")
     public void checkAdmin(JoinPoint joinPoint, Admin admin) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+        if (auth == null || !auth.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
             throw new AccessDeniedException("관리자만 접근 가능합니다.");
         }
     }
