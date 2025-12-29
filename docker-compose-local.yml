@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: hackaton.local.db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: hackaton
+      MYSQL_USER: hackaton
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
