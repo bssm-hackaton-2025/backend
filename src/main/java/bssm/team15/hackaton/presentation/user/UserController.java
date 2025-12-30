@@ -73,7 +73,7 @@ public class UserController {
         return useCouponUseCase.useCoupon(couponId);
     }
 
-    @GetMapping("/coupon")
+    @GetMapping("/me/coupon")
     public List<CouponResponse> getMyCoupon(
             @AuthenticationPrincipal User user
     ){
