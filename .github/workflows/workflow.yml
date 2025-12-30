@@ -1,0 +1,43 @@
+name: Deploy to Proxmox VM
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Deploy to Proxmox VM
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          script: |
+            cd /ocean-saver
+            git pull origin master
+            ./gradlew clean build -x test
+
+            export DB_URL=${{ secrets.DB_URL }}
+            export DB_USERNAME=${{ secrets.DB_USERNAME }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            export EMAIL=${{ secrets.EMAIL }}
+            export GOOGLE_PASSWORD=${{ secrets.GOOGLE_PASSWORD }}
+            export GEMINI_KEY=${{ secrets.GEMINI_KEY }}
+            export DATA_KEY=${{ secrets.DATA_KEY }}
+            export SECRET_KEY=${{ secrets.SECRET_KEY }}
+            export IMAGE_SAVE_PATH=${{ secrets.IMAGE_SAVE_PATH }}
+            export SPRING_PROFILES_ACTIVE=prod
+
+            pkill -f 'hackaton-0.0.1-SNAPSHOT.jar' || true
+            nohup java -jar build/libs/hackaton-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
