@@ -13,6 +13,7 @@ public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String location;
     private String description;
     private Long price;
@@ -23,7 +24,8 @@ public class Experience {
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;
 
-    public Experience(String location, String description, Long price, Integer maxParticipants, String businessRegistrationNumber, String businessName, User user) {
+    public Experience(String title, String location, String description, Long price, Integer maxParticipants, String businessRegistrationNumber, String businessName, User user) {
+        this.title = title;
         this.location = location;
         this.description = description;
         this.price = price;

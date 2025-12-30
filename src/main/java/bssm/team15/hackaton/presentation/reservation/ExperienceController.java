@@ -6,6 +6,7 @@ import bssm.team15.hackaton.application.experience.GetOneExperienceUseCase;
 import bssm.team15.hackaton.domain.user.User;
 import bssm.team15.hackaton.presentation.reservation.dto.request.CreateExperienceRequest;
 import bssm.team15.hackaton.presentation.reservation.dto.response.ExperienceResponse;
+import bssm.team15.hackaton.presentation.reservation.dto.response.SimpleExperienceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/experience")
+@RequestMapping("/experiences")
 public class ExperienceController {
 
     private final GetAllExperienceUseCase getAllExperienceUseCase;
@@ -22,7 +23,7 @@ public class ExperienceController {
     private final CreateExperienceUseCase createExperienceUseCase;
 
     @GetMapping
-    public List<ExperienceResponse> getAllExperience() {
+    public List<SimpleExperienceResponse> getAllExperience() {
         return getAllExperienceUseCase.getExperiences();
     }
 

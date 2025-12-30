@@ -2,24 +2,22 @@ package bssm.team15.hackaton.presentation.reservation.dto.response;
 
 import bssm.team15.hackaton.domain.experience.Experience;
 
-public record ExperienceResponse(
+public record SimpleExperienceResponse(
         Long id,
         String title,
         String businessName,
         String ownerName,
         String description,
-        String location,
-        Long price
+        String location
 ) {
-    public static ExperienceResponse from(Experience experience) {
-        return new ExperienceResponse(
+    public static SimpleExperienceResponse from(Experience experience) {
+        return new SimpleExperienceResponse(
                 experience.getId(),
                 experience.getTitle(),
                 experience.getBusinessName(),
                 experience.getOwner().getNickname(),
                 experience.getDescription(),
-                experience.getLocation(),
-                experience.getPrice()
+                experience.getLocation()
         );
     }
 }

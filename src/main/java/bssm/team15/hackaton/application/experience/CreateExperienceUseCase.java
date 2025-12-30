@@ -24,6 +24,7 @@ public class CreateExperienceUseCase {
                 .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다"));
         Experience experience = experienceRepository.save(
                 new Experience(
+                        request.getTitle(),
                         request.getLocation(),
                         request.getDescription(),
                         request.getPrice(),

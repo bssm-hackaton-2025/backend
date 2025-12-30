@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateExperienceRequest {
 
+    private String title;
+
     private String location;
 
     private String description;

@@ -2,6 +2,7 @@ package bssm.team15.hackaton.application.experience;
 
 import bssm.team15.hackaton.infrastructure.persistence.reservation.ExperienceRepository;
 import bssm.team15.hackaton.presentation.reservation.dto.response.ExperienceResponse;
+import bssm.team15.hackaton.presentation.reservation.dto.response.SimpleExperienceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,10 @@ public class GetAllExperienceUseCase {
 
     private final ExperienceRepository experienceRepository;
 
-    public List<ExperienceResponse> getExperiences() {
+    public List<SimpleExperienceResponse> getExperiences() {
         return experienceRepository.findAll()
                 .stream()
-                .map(ExperienceResponse::from)
+                .map(SimpleExperienceResponse::from)
                 .toList();
     }
 
