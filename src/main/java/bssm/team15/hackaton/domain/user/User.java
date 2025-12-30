@@ -31,6 +31,9 @@ public class User {
 
     private Boolean isOwner = false;
 
+    @Column(nullable = false)
+    private Long point = 0L;
+
     @Builder
     private User(String email, String nickname, String password) {
         this.email = email;
@@ -49,6 +52,13 @@ public class User {
 
     public void isOwner(){
         this.isOwner = !this.isOwner;
+    }
+
+    public void addPoint(Long point){
+        if(point < 0){
+            throw new IllegalArgumentException("음수는 추가할 수 없습니다.");
+        }
+        this.point += point;
     }
 
 }
