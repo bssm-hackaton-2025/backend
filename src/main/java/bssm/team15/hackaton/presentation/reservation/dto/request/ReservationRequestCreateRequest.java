@@ -17,4 +17,5 @@ public class ReservationRequestCreateRequest {
     private String description;
     private Long price;
     private Integer maxParticipants;
+
 }

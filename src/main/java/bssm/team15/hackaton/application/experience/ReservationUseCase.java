@@ -1,4 +1,4 @@
-package bssm.team15.hackaton.application.user.usecase;
+package bssm.team15.hackaton.application.experience;
 
 import bssm.team15.hackaton.domain.reservation.Reservation;
 import bssm.team15.hackaton.domain.reservation.ReservationStatus;
@@ -9,6 +9,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class ReservationUseCase {
+
     private final ReservationRepository reservationRepository;
 
     @Transactional

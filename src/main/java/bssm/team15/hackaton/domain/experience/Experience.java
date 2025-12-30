@@ -1,4 +1,4 @@
-package bssm.team15.hackaton.domain.entity;
+package bssm.team15.hackaton.domain.experience;
 
 import jakarta.persistence.*;
 import lombok.*;
