@@ -1,7 +1,9 @@
 package bssm.team15.hackaton.application.trash;
 
+import bssm.team15.hackaton.domain.coupon.Coupon;
 import bssm.team15.hackaton.domain.trash.Trash;
 import bssm.team15.hackaton.domain.user.User;
+import bssm.team15.hackaton.infrastructure.persistence.coupon.CouponRepository;
 import bssm.team15.hackaton.infrastructure.persistence.trash.TrashRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.Random;
+
 @Service
 @RequiredArgsConstructor
 public class SetStatusTrashUseCase {
     private final TrashRepository trashRepository;
+    private final CouponRepository couponRepository;
 
     @Transactional
     public void confirm(User user, Long id) {
@@ -26,6 +32,16 @@ public class SetStatusTrashUseCase {
         );
 
         trash.confirm();
+
+        List<Coupon> availableCoupons = couponRepository.findByOwnerAndIsUsedFalse(user);
+
+        if (!availableCoupons.isEmpty()) {
+            Coupon randomCoupon = availableCoupons.get(new Random().nextInt(availableCoupons.size()));
+
+            randomCoupon.setOwner(user);
+
+            couponRepository.save(randomCoupon);
+        }
     }
 
     @Transactional
