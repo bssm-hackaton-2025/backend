@@ -39,7 +39,11 @@ public class User {
         this.role = Role.USER;
     }
 
-    public static User from(String email, String nickname, String password) {
+    public static User from(
+            String email,
+            String nickname,
+            String password
+    ) {
         return User.builder()
                 .email(email)
                 .nickname(nickname)
@@ -47,7 +51,7 @@ public class User {
                 .build();
     }
 
-    public void isOwner(){
+    public void isOwner() {
         this.isOwner = !this.isOwner;
     }
 

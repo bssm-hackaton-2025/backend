@@ -1,5 +1,12 @@
 spring:
 
+  mvc:
+    static-path-pattern: /static/**
+
+  web:
+    resources:
+      static-locations: file:${IMAGE_SAVE_PATH}
+
   jpa:
     database: mysql
     properties:
