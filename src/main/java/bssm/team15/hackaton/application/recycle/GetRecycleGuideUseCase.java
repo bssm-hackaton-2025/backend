@@ -22,18 +22,16 @@ public class GetRecycleGuideUseCase {
 
     private String createPrompt(String trashName, String location) {
         return String.format("""
-            사용자가 '%s' 지역에서 '%s'를 주웠습니다.
-            이 쓰레기에 대한 분리배출 정보를 아래 형식으로 정확하게 알려주세요.
-            
-            쓰레기 종류: (정확한 쓰레기 이름)
-            분류: (일반쓰레기/재활용/음식물/대형폐기물 중 하나)
-            분리배출 방법: (구체적인 배출 방법, 3-4문장으로 자세히)
-            버리는 곳: (%s 지역 기준으로 어디에 버려야 하는지, 2-3문장)
-            추가 팁: (주의사항이나 팁, 2-3문장)
-            
-            반드시 위 형식을 정확히 지켜서 답변해주세요.
-            한국의 분리배출 규정과 %s 지역의 규정에 따라 답변해주세요.
-            """, location, trashName, location, location);
+        %s 지역, '%s' 분리배출 정보:
+        
+        쓰레기 종류:
+        분류: (일반/재활용/음식물/대형 중 택1)
+        분리배출 방법: (2-3문장)
+        버리는 곳: (%s 기준, 1-2문장)
+        추가 팁: (1-2문장)
+        
+        위 형식으로만 답변.
+        """, location, trashName, location);
     }
 
     private RecycleGuideResponse parseResponse(String aiResponse, String trashName) {
