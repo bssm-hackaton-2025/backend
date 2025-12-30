@@ -2,8 +2,10 @@ package bssm.team15.hackaton.presentation.trash;
 
 import bssm.team15.hackaton.application.trash.CreateTrashUseCase;
 import bssm.team15.hackaton.application.trash.ReadTrashesUseCase;
+import bssm.team15.hackaton.application.trash.UpdateTrashUseCase;
 import bssm.team15.hackaton.domain.user.User;
 import bssm.team15.hackaton.presentation.trash.dto.response.TrashResponse;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import java.util.List;
 public class TrashController {
     private final CreateTrashUseCase createTrashUseCase;
     private final ReadTrashesUseCase readTrashesUseCase;
+    private final UpdateTrashUseCase updateTrashUseCase;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
@@ -34,6 +37,16 @@ public class TrashController {
             @AuthenticationPrincipal User user
     ) {
         return readTrashesUseCase.readTrashes(user);
+    }
+
+    @PatchMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void update(
+            @AuthenticationPrincipal User user,
+            @PathVariable Long id,
+            @RequestParam("imageData") MultipartFile imageData,
+            @RequestParam("location") String location
+    ) {
+        updateTrashUseCase.update(user, id, imageData, location);
     }
 
 }
