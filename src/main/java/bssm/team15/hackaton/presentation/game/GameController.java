@@ -5,11 +5,14 @@ import bssm.team15.hackaton.domain.user.User;
 import bssm.team15.hackaton.presentation.game.dto.request.CreateGameRoomRequest;
 import bssm.team15.hackaton.presentation.game.dto.request.JoinGameRoomRequest;
 import bssm.team15.hackaton.presentation.game.dto.request.SubmitScoreRequest;
+import bssm.team15.hackaton.presentation.game.dto.response.GameRoomNameResponse;
 import bssm.team15.hackaton.presentation.game.dto.response.GameRoomResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,6 +25,7 @@ public class GameController {
     private final GameSseManager gameSseManager;
     private final AddScoreUseCase addScoreUseCase;
     private final StartGameUseCase startGameUseCase;
+    private final GetAllGameRoomUseCase getAllGameRoomUseCase;
 
     @PostMapping("/rooms")
     public GameRoomResponse createGameRoom(
@@ -29,6 +33,11 @@ public class GameController {
             @RequestBody CreateGameRoomRequest createGameRoomRequest
     ){
         return createGameRoomUseCase.execute(createGameRoomRequest, user);
+    }
+
+    @GetMapping
+    public List<GameRoomNameResponse> getGameRooms(){
+        return getAllGameRoomUseCase.getAllGameRooms();
     }
 
     @PatchMapping("/rooms/{id}")
