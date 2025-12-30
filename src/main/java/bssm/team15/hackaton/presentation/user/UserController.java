@@ -36,7 +36,7 @@ public class UserController {
     @GetMapping
     public UserResponse getUserInfo(
             @AuthenticationPrincipal User user
-    ){
+    ) {
         return getUserInfoUseCase.getUserInfo(user);
     }
 
