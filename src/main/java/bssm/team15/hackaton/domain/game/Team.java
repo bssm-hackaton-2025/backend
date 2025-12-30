@@ -26,6 +26,8 @@ public class Team {
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<UserGameRoom> members = new ArrayList<>();
 
+    private int score = 0;
+
     private Integer maxMembers = 2;
 
     @Builder
@@ -43,6 +45,13 @@ public class Team {
 
     public boolean isFull() {
         return members.size() >= this.maxMembers;
+    }
+
+    public void addPoint(int point){
+        if(point < 0){
+            throw new IllegalArgumentException("포인트는 0점보다 작을 수 없습니다.");
+        }
+        this.score += point;
     }
 
 }

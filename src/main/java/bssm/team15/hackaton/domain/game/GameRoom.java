@@ -25,6 +25,9 @@ public class GameRoom {
     @ManyToOne(fetch = FetchType.LAZY)
     private User host;
 
+    @OneToOne(mappedBy = "gameRoom", cascade = CascadeType.ALL)
+    private Game game;
+
     private String password;
 
     @OneToMany(mappedBy = "gameRoom", cascade = CascadeType.ALL)
@@ -72,6 +75,10 @@ public class GameRoom {
         return teamA.getMembers().size() < teamB.getMembers().size()
                 ? teamA
                 : teamB;
+    }
+
+    public void attachGame(Game game) {
+        this.game = game;
     }
 
 }

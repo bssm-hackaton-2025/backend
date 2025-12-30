@@ -5,12 +5,14 @@ import bssm.team15.hackaton.domain.game.Team;
 import java.util.List;
 
 public record TeamResponse(
+        Long id,
         String teamName,
         Integer maxMembers,
         List<String> users
 ) {
     public static TeamResponse from(Team team) {
         return new TeamResponse(
+                team.getId(),
                 team.getName(),
                 team.getMaxMembers(),
                 team.getMembers().stream()
