@@ -12,7 +12,8 @@ public class GetUserInfoUseCase {
     public UserResponse getUserInfo(User user) {
         return new UserResponse(
                 user.getId(),
-                user.getNickname()
+                user.getNickname(),
+                user.getPoint()
         );
     }
 
