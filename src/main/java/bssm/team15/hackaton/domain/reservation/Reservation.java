@@ -1,7 +1,7 @@
 package bssm.team15.hackaton.domain.reservation;
 
-import bssm.team15.hackaton.domain.entity.Experience;
-import bssm.team15.hackaton.domain.entity.User;
+import bssm.team15.hackaton.domain.experience.Experience;
+import bssm.team15.hackaton.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

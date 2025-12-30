@@ -1,16 +1,16 @@
 package bssm.team15.hackaton.application.usecase.reservation;
 
-import bssm.team15.hackaton.domain.entity.Experience;
-import bssm.team15.hackaton.domain.entity.User;
+import bssm.team15.hackaton.domain.experience.Experience;
 import bssm.team15.hackaton.domain.reservation.Reservation;
 import bssm.team15.hackaton.domain.reservation.ReservationStatus;
+import bssm.team15.hackaton.domain.user.User;
 import bssm.team15.hackaton.infrastructure.persistence.reservation.ExperienceRepository;
 import bssm.team15.hackaton.infrastructure.persistence.reservation.ReservationRepository;
+import bssm.team15.hackaton.infrastructure.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,6 +20,7 @@ public class ReservationUseCase {
 
     private final ReservationRepository reservationRepository;
     private final ExperienceRepository experienceRepository;
+    private final UserRepository userRepository;
 
     /**
      * 신규 예약 생성
@@ -42,12 +43,9 @@ public class ReservationUseCase {
             throw new IllegalStateException("정원이 초과되었습니다. 남은 자리: " + (experience.getMaxParticipants() - currentCount));
         }
 
-        // 4. 예약 엔티티 생성
-        // 주의: User.builder().id(userId).build()는 영속성 컨텍스트에 없는 객체이므로
-        // 실제 운영 환경에서는 UserRepository.getReferenceById(userId)를 권장합니다.
-        User user = User.builder()
-                .id(userId)
-                .build();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+
 
         Reservation reservation = Reservation.builder()
                 .user(user)
