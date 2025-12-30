@@ -1,7 +1,9 @@
 package bssm.team15.hackaton.presentation.recycle;
 
+import bssm.team15.hackaton.application.ocean.AnalyzeOceanTrashUseCase;
 import bssm.team15.hackaton.application.recycle.GetRecycleGuideUseCase;
 import bssm.team15.hackaton.infrastructure.gemini.GeminiProperties;
+import bssm.team15.hackaton.infrastructure.oceans.TrashAnalysisResponse;
 import bssm.team15.hackaton.presentation.recycle.dto.request.RecycleGuideRequest;
 import bssm.team15.hackaton.presentation.recycle.dto.response.RecycleGuideResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,13 @@ public class RecycleController {
 
     private final GetRecycleGuideUseCase getRecycleGuideUseCase;
     private final GeminiProperties properties;
+
+    private final AnalyzeOceanTrashUseCase analyzeOceanTrashUseCase;
+
+    @GetMapping("/analyze")
+    public TrashAnalysisResponse analyze() {
+        return analyzeOceanTrashUseCase.analyze();
+    }
 
     @PostMapping("/guide")
     public RecycleGuideResponse getGuide(@RequestBody RecycleGuideRequest request) {

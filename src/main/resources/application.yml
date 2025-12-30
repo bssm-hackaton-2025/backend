@@ -40,5 +40,13 @@ gemini:
     key: ${GEMINI_KEY}
     url: https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
 
+ocean-trash:
+  api:
+    key: ${DATA_KEY}
+    url: https://apis.data.go.kr/1192000/service/NationOceanGarbageMonitoringInfoService/NationOceanGarbageMonitoringInfoService
+
+
+
+
 jwt:
   secret: ${SECRET_KEY}
