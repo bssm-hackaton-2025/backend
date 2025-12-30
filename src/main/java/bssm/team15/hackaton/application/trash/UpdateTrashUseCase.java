@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class UpdateTrashUseCase {
                 HttpStatus.NOT_FOUND,
                 ""
         ));
-        if (trash.getStatus() != null) throw new ResponseStatusException(
+        if (!trash.statusIsSettable()) throw new ResponseStatusException(
                 HttpStatus.CONFLICT,
                 ""
         );
