@@ -35,7 +35,7 @@ public class GameController {
         return createGameRoomUseCase.execute(createGameRoomRequest, user);
     }
 
-    @GetMapping
+    @GetMapping("/rooms")
     public List<GameRoomNameResponse> getGameRooms(){
         return getAllGameRoomUseCase.getAllGameRooms();
     }
