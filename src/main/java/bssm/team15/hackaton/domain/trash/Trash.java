@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tbl_trash")
 @Getter
@@ -30,6 +32,9 @@ public class Trash {
     @Column
     private String rejectReason;
 
+    @Column(nullable = false)
+    private LocalDateTime createAt;
+
     public static Trash create(
             Long userId,
             String location
@@ -37,6 +42,7 @@ public class Trash {
         Trash trash = new Trash();
         trash.userId = userId;
         trash.level1Location = location;
+        trash.createAt = LocalDateTime.now();
         return trash;
     }
 

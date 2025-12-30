@@ -31,6 +31,10 @@ public class CreateTrashUseCase {
 
     @Transactional
     public void create(User user, MultipartFile imageData, String location) {
+        if (user == null) throw new ResponseStatusException(
+                HttpStatus.UNAUTHORIZED,
+                ""
+        );
         Trash trash = Trash.create(user.getId(), location);
         trashRepository.save(
                 trash
